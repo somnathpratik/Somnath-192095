@@ -1,0 +1,29 @@
+---
+# Ansible playbook task
+- name: somnathpratik-192095
+  hosts: client_1
+  tasks:
+    - name: install nginx and postgresql
+      become: yes
+      become_user: root
+      apt:
+        pkg:
+          - nginx
+          - postgresql
+        state: present
+        update_cache: yes
+    - name: create directory
+      become_user: root
+      file: path=/home/ubuntu/somnath192095_19 state=directory mode=0755
+    - name: create a user
+      become_user: root
+      user:
+        name: somnath
+        state: present  
+        password: $6$QX0j18rc$EDz1oSlWti8XwEpCrQUTnSRhTfqmWA52oM1WRNEulzMHJgQS47gdGN.eQOKaTN83c.H73I91TpSLDoH5pyw1X0
+    - name: uninstall nano
+      become_user: root
+      apt:
+        pkg: nano
+        state: absent
+     
